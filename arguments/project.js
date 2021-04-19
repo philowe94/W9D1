@@ -99,13 +99,21 @@ function curriedSum(numArgs) {
 }
 
 Function.prototype.curry = function(numArgs) {
-
-    if 
-
+    let fn = this;
+    // debugger;
+    let args = [];
+    let _curriedFunc = function(arg) {
+        args.push(arg);
+        if (args.length === numArgs) {
+            return fn.apply(null, args);
+        } else {
+            return _curriedFunc;
+        }
+    }
     return _curriedFunc;
 }
 
-let curriedSays = markov.says.curry(2);
+// let curriedSays = markov.says.curry(2);
 
-curriedSays(arg1); //returns nothing
-curriedSays(arg2); //returns something, now that we hit numArgs === 2
+// curriedSays(arg1); //returns nothing
+// curriedSays(arg2); //returns something, now that we hit numArgs === 2
