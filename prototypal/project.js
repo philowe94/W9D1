@@ -10,26 +10,28 @@ Function.prototype.inherits = function(SuperClass) {
 
 
 Function.prototype.inherits2 = function (SuperClass) {
-    this.prototype = Object.create(SuperClass);
+    this.prototype = Object.create(SuperClass.prototype);
     this.prototype.constructor = this;
-
-
 }
 
-function movingObject () {};
-movingObject.prototype.move = function() {
-    console.log("Moving");
+
+function MovingObject () {};
+MovingObject.prototype.move = function () {
+    console.log("moving");
 }
 
 function Ship () {};
 
 function Asteroid () {};
 
-Ship.inherits2(movingObject);
-Asteroid.inherits2(movingObject);
+function Blasteroid () {};
+
+
+Ship.inherits(MovingObject);
+Asteroid.inherits2(MovingObject);
 
 let s = new Ship();
-let a  = new Asteroid();
+let a = new Asteroid();
 
 s.move();
 a.move();
