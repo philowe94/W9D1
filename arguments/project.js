@@ -117,3 +117,22 @@ Function.prototype.curry = function(numArgs) {
 
 // curriedSays(arg1); //returns nothing
 // curriedSays(arg2); //returns something, now that we hit numArgs === 2
+
+/**
+ * With ES6 arrow functions
+ * Notice we dont need to keep track of the `this` context (const fn = this).
+ * An arrow function does not have its own `this`, 
+ * the `this` value of the enclosing execution context is used.
+ */
+Function.prototype.curriedFunc2 = function(numArgs) {
+    let args = [];
+    let _curriedFunc2 = (arg) => {
+        args.push(arg);
+        if (args.length === numArgs) {
+            return this(...args)
+        } else {
+            return _curriedFunc2;
+        }
+    }
+    return _curriedFunc2;
+}
